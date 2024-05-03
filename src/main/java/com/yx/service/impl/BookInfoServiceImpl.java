@@ -49,4 +49,11 @@ public class BookInfoServiceImpl implements BookInfoService {
     public List<BookInfo> getBookCountByType() {
         return bookInfoMapper.getBookCountByType();
     }
+
+    @Override
+    public PageInfo<BookInfo> queryBookInfoRe(BookInfo bookInfo, Integer pageNum, Integer limit) {
+        PageHelper.startPage(pageNum,limit);
+        List<BookInfo> bookInfoList = bookInfoMapper.queryBookInfoRe(bookInfo);
+        return new PageInfo<>(bookInfoList);
+    }
 }

@@ -88,6 +88,25 @@
         </div>
     </div>
 
+    <div class="layui-upload layui-form-item">
+        <label class="layui-form-label">图片:</label>
+        <div class="layui-upload layui-input-block">
+            <input type="hidden" name="img" value="${info.img}" />
+            <button type="button" class="layui-btn layui-btn-primary" id="fileBtn"><i class="layui-icon">&#xe67c;</i>选择文件</button>
+            <button type="button" class="layui-btn layui-btn-warm" id="uploadBtn">开始上传</button>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label required">推荐</label>
+        <div class="layui-input-block">
+            <select name="recommend" id="recommend" lay-verify="required">
+                <option value="1">是</option>
+                <option value="0">否</option>
+            </select>
+        </div>
+    </div>
+
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认修改</button>
@@ -96,6 +115,22 @@
 </div>
 <script src="${pageContext.request.contextPath}/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script>
+
+    layui.use('upload',function(){
+        var $ = layui.$;
+        var upload = layui.upload;
+        upload.render({
+            elem: '#fileBtn'
+            ,url: 'updatePersonalById'
+            ,accept: 'file'
+            ,auto: false
+            ,bindAction: '#uploadBtn'
+            ,done: function(res){
+                $("[name=img]").val(res.data.src);
+            }
+        });
+    });
+
     layui.use(['form','laydate'], function () {
         var form = layui.form,
             layer = layui.layer,

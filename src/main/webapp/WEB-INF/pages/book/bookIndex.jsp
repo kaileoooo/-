@@ -83,6 +83,7 @@
 
         table.render({
             elem: '#currentTableId',
+            height:700,
             url: '${pageContext.request.contextPath}/bookAll',//查询类型数据
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
@@ -93,12 +94,17 @@
             cols: [[
                 {type: "checkbox", width: 50},
                 //{field: 'id', width: 100, title: 'ID', sort: true},
+                {field: 'img' ,width:120,title: '图片',templet: function(d) {
+                    return '<div onclick="show_img(this)" ><img src="${pageContext.request.contextPath}/images/'+d.img+'" ' + 'alt="" width="50px" height="50px"></a></div>'; }},
                 {field: 'isbn', width: 100, title: '图书编号'},
                 {field: 'name', width: 100, title: '图书名称'},
-                {templet:'<div>{{d.typeInfo.name}}</div>',width:100,title:'图书类型'},
+                {templet:'<div>{{d.typeInfo.name}}</div>',width:100,height:90,title:'图书类型'},
                 {field: 'author', width: 80, title: '作者'},
                 {field: 'price', width: 80, title: '价格'},
                 {field: 'language', width: 80, title: '语言'},
+                {field: 'recommend', width: 80, title: '推荐',templet: function(d){
+                        return d.recommend==0?'否':'是'
+                    }},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],

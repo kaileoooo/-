@@ -10,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -60,6 +64,16 @@ public class BookInfoController {
     @RequestMapping("/addBookSubmit")
     @ResponseBody
     public DataInfo addBookSubmit(BookInfo info){
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        if (info.getPubDate()!=null){
+            try {
+                Date parse = sdf.parse(info.getPubDate());
+                info.setPublishDate(parse);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
         bookInfoService.addBookSubmit(info);
         return DataInfo.ok();
     }
@@ -72,6 +86,14 @@ public class BookInfoController {
         BookInfo bookInfo= bookInfoService.queryBookInfoById(id);
         model.addAttribute("info",bookInfo);
         return "book/updateBook";
+    }
+
+    /**
+     * 预约页面的跳转
+     */
+    @GetMapping("/bookSub")
+    public String bookSub(){
+        return "book/bookSub";
     }
 
     /**

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.List;
@@ -34,6 +35,26 @@ public class ReaderInfoController {
     public String readerIndex(){
         return "reader/readerIndex";
     }
+
+    /**
+     * 跳转读者个人信息
+     */
+    @GetMapping("/readerInfo")
+    public String readerInfo(HttpServletRequest request,Model model){
+        HttpSession session = request.getSession();
+        ReaderInfo readerInfo = (ReaderInfo) session.getAttribute("user");
+        ReaderInfo pageInfo = readerInfoService.queryReaderInfoById(readerInfo.getId());
+        model.addAttribute("info",pageInfo);
+        return "reader/readerinfo";
+    }
+
+    @RequestMapping("/queryReaderInfo")
+    @ResponseBody
+    public DataInfo queryReaderInfo(HttpServletRequest request){
+
+        return DataInfo.ok("成功");
+    }
+
 
     /**
      * 查询所有数据
@@ -125,4 +146,28 @@ public class ReaderInfoController {
         }
         return DataInfo.ok();
     }
+
+    /**
+     * 充值页面
+     */
+    @GetMapping("/readerTopup")
+    public String readerTopup(){
+        return "reader/readerTopUp";
+    }
+
+    /**
+     * 充值页面
+     */
+    @GetMapping("/addReaderMemberTime")
+    @ResponseBody
+    public DataInfo addReaderMemberTime(HttpServletRequest request,String type){
+        HttpSession session = request.getSession();
+        ReaderInfo readerInfo = (ReaderInfo) session.getAttribute("user");
+        readerInfoService.addReaderMemberTime(readerInfo,type);
+        return DataInfo.ok();
+    }
+
+
+
+
 }

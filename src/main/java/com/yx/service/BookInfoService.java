@@ -35,4 +35,6 @@ public interface BookInfoService {
      * 根据类型获取图书数量
      */
     List<BookInfo> getBookCountByType();
+
+    PageInfo<BookInfo> queryBookInfoRe(BookInfo bookInfo, Integer pageNum, Integer limit);
 }

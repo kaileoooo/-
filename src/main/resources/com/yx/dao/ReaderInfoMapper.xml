@@ -26,7 +26,7 @@
       This element was generated on Tue Mar 30 16:30:04 CST 2021.
     -->
     id, username, password, realName, sex, birthday, address, tel, email, registerDate,
-    readerNumber
+    readerNumber,menberTime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
@@ -179,6 +179,9 @@
       </if>
       <if test="readerNumber != null">
         readerNumber = #{readerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="menberTime != null">
+        menberTime = #{menberTime,jdbcType=DATE},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}

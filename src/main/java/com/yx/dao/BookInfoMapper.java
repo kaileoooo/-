@@ -1,6 +1,8 @@
 package com.yx.dao;
 
 import com.yx.po.BookInfo;
+import com.yx.po.BookReader;
+import org.apache.ibatis.annotations.Param;
 
 import java.awt.print.Book;
 import java.util.List;
@@ -63,4 +65,20 @@ public interface BookInfoMapper {
      * 根据类型获取图书数量
      */
     List<BookInfo> getBookCountByType();
+
+    List<BookInfo> queryBookInfoRe(BookInfo bookInfo);
+
+    BookReader queryBookReaderInfoById(@Param("bookId") Integer bookId, @Param("readerId") Integer readerId);
+
+    void addBookReader(BookReader info);
+
+    List<BookReader> getBookReaderList(Integer id);
+
+    void removeSub(int id);
+
+    void getBookSubmit(int id);
+
+    BookReader getBookById(Integer id);
+
+    BookReader getOne(int id);
 }
