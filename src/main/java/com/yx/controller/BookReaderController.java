@@ -3,6 +3,7 @@ package com.yx.controller;
 
 import com.yx.po.BookInfo;
 import com.yx.po.BookReader;
+import com.yx.po.BookReaderReq;
 import com.yx.po.ReaderInfo;
 import com.yx.service.BookInfoService;
 import com.yx.service.BookReaderService;
@@ -44,7 +45,7 @@ public class BookReaderController {
         BookInfo bookInfo= bookInfoService.queryBookInfoById(id);
         HttpSession session = request.getSession();
         ReaderInfo readerInfo = (ReaderInfo) session.getAttribute("user");
-        BookReader reader=bookReaderService.queryBookReaderInfoById(bookInfo.getId(),readerInfo.getId());
+        BookReaderReq reader=bookReaderService.queryBookReaderInfoById(bookInfo.getId(),readerInfo.getId());
         model.addAttribute("info",reader);
         return "book/bookToReader";
     }

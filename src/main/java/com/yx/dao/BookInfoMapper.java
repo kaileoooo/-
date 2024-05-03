@@ -2,6 +2,7 @@ package com.yx.dao;
 
 import com.yx.po.BookInfo;
 import com.yx.po.BookReader;
+import com.yx.po.BookReaderReq;
 import org.apache.ibatis.annotations.Param;
 
 import java.awt.print.Book;
@@ -68,7 +69,7 @@ public interface BookInfoMapper {
 
     List<BookInfo> queryBookInfoRe(BookInfo bookInfo);
 
-    BookReader queryBookReaderInfoById(@Param("bookId") Integer bookId, @Param("readerId") Integer readerId);
+    BookReaderReq queryBookReaderInfoById(@Param("bookId") Integer bookId, @Param("readerId") Integer readerId);
 
     void addBookReader(BookReader info);
 
