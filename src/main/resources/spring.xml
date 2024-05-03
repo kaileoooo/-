@@ -47,6 +47,17 @@
         <property name="basePackage" value="com.yx.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
+
+    <!-- 文件上传配置 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 默认编码 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 上传文件大小限制为150M，150*1024*1024 -->
+        <property name="maxUploadSize" value="157286400"/>
+        <!-- 内存中的最大值 -->
+        <property name="maxInMemorySize" value="4096"/>
+    </bean>
+
     <!--告知spring注解位置，保证注解有效性，下面注解扫描表示Controller不扫，给service和dao扫描-->
     <context:component-scan base-package="com.yx">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:exclude-filter>

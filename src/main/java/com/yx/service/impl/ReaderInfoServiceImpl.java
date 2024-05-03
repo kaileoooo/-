@@ -8,6 +8,9 @@ import com.yx.service.ReaderInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service("readerInfoService")
@@ -49,4 +52,35 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
     public ReaderInfo queryUserInfoByNameAndPassword(String username, String password) {
         return readerInfoMapper.queryUserInfoByNameAndPassword(username, password);
     }
+
+    @Override
+    public ReaderInfo queryReaderInfo(Integer id) {
+        return null;
+    }
+
+    @Override
+    public void addReaderMemberTime(ReaderInfo readerInfo, String type) {
+        ReaderInfo info = readerInfoMapper.selectByPrimaryKey(readerInfo.getId());
+        Date date = getDate(info.getMenberTime(), type);
+        info.setMenberTime(date);
+        readerInfoMapper.updateByPrimaryKeySelective(info);
+    }
+
+    public static Date getDate(Date date,String type){
+        Calendar calendar=Calendar.getInstance();
+        if (date==null){
+            calendar.setTime(new Date());
+        }else{
+            calendar.setTime(date);
+        }
+        if ("month".equals(type)){
+            calendar.add(Calendar.MONTH,1);
+        }else if("quarter".equals(type)){
+            calendar.add(Calendar.MONTH,3);
+        }else if("year".equals(type)){
+            calendar.add(Calendar.YEAR,1);
+        }
+        return calendar.getTime();
+    }
+
 }

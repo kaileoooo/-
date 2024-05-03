@@ -36,4 +36,8 @@ public interface ReaderInfoService {
      * 根据用户名和密码查询用户信息
      */
     ReaderInfo queryUserInfoByNameAndPassword(String username,String password);
+
+    ReaderInfo queryReaderInfo(Integer id);
+
+    void addReaderMemberTime(ReaderInfo readerInfo, String type);
 }

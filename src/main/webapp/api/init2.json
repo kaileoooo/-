@@ -1,14 +1,13 @@
 {
   "homeInfo": {
     "title": "首页",
-    "href": "welcome"
+    "href": "welcomeReader"
   },
   "logoInfo": {
     "title": "图书馆管理",
     "image": "images/favicon.ico",
     "href": ""
   },
-
   "menuInfo": [
     {
       "title": "功能管理",
@@ -27,14 +26,33 @@
             "href": "queryLookBookList2",
             "icon": "fa fa-gears",
             "target": "_self"
-          }
+          },
+        {
+          "title": "图书预约",
+          "href": "bookSub",
+          "icon": "fa fa-gears",
+          "target": "_self"
+        },
+        {
+          "title": "我的预约",
+          "href": "myBookSub",
+          "icon": "fa fa-gears",
+          "target": "_self"
+        },
+        {
+          "title": "会员充值",
+          "href": "readerTopup",
+          "icon": "fa fa-gears",
+          "target": "_self"
+        },
+        {
+          "title": "个人信息",
+          "href": "readerInfo",
+          "icon": "fa fa-gears",
+          "target": "_self"
+        }
       ]
-    },
-    {
-      "title": "个人信息",
-      "icon": "",
-      "href": "",
-      "target": "_self"
     }
+
   ]
 }
