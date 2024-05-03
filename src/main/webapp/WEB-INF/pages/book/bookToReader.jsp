@@ -1,8 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page isELIgnored="false" %>
 
 <html>
 <head>
@@ -67,7 +66,6 @@
         <label class="layui-form-label">预约开始日期</label>
         <div class="layui-input-block">
             <input type="text" name="startTime" id="date"
-                   value="<fmt:formatDate value="" pattern="yyyy-MM-dd"/>"
                    lay-verify="date" autocomplete="off" class="layui-input"/>
         </div>
     </div>
@@ -76,7 +74,6 @@
         <label class="layui-form-label">预约结束日期</label>
         <div class="layui-input-block">
             <input type="text" name="endTime" id="date2"
-                   value="<fmt:formatDate value="" pattern="yyyy-MM-dd"/>"
                    lay-verify="date" autocomplete="off" class="layui-input"/>
         </div>
     </div>
@@ -106,27 +103,6 @@
             trigger:'click'
         });
 
-        //动态获取图书类型的数据
-        $.get("findAllList",{},function (data) {
-            //获取图书类型的值
-            var typeId=$('#typeId')[0].value;
-            var list=data;
-            var select=document.getElementById("typeId");
-            if(list!=null|| list.size()>0){
-                for(var c in list){
-                    var option=document.createElement("option");
-                    option.setAttribute("value",list[c].id);
-                    option.innerText=list[c].name;
-                    select.appendChild(option);
-                    //如果类型和循环到的类型iD一致，选中
-                    if (list[c].id==typeId){
-                        option.setAttribute("selected","selected");
-                        layui.form.render('select');
-                    }
-                }
-            }
-            form.render('select');
-        },"json")
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
